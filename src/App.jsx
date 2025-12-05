@@ -445,39 +445,39 @@ function App() {
               <div className="mb-6 overflow-x-auto">
                 <table className="w-full text-sm border-collapse">
                   <thead>
-                    <tr className="bg-gray-100">
-                      <th className="border border-gray-300 px-3 py-2 text-left">No</th>
-                      <th className="border border-gray-300 px-3 py-2 text-left">Deskripsi</th>
-                      <th className="border border-gray-300 px-3 py-2 text-center">Qty</th>
-                      <th className="border border-gray-300 px-3 py-2 text-center">Satuan</th>
-                      <th className="border border-gray-300 px-3 py-2 text-right">Harga Satuan</th>
-                      <th className="border border-gray-300 px-3 py-2 text-right">Jumlah</th>
+                    <tr className="bg-black text-white">
+                      <th className="border border-black px-3 py-2 text-left">No</th>
+                      <th className="border border-black px-3 py-2 text-left">Deskripsi</th>
+                      <th className="border border-black px-3 py-2 text-center">Qty</th>
+                      <th className="border border-black px-3 py-2 text-center">Satuan</th>
+                      <th className="border border-black px-3 py-2 text-right">Harga Satuan</th>
+                      <th className="border border-black px-3 py-2 text-right">Jumlah</th>
                     </tr>
                   </thead>
                   <tbody>
                     {items.map((item, index) => (
-                      <tr key={item.id}>
-                        <td className="border border-gray-300 px-3 py-2">{index + 1}</td>
-                        <td className="border border-gray-300 px-3 py-2">{item.deskripsi || '-'}</td>
-                        <td className="border border-gray-300 px-3 py-2 text-center">{item.qty}</td>
-                        <td className="border border-gray-300 px-3 py-2 text-center">{item.satuan}</td>
-                        <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(item.hargaSatuan)}</td>
-                        <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateSubtotal(item))}</td>
+                      <tr key={item.id} className="bg-white">
+                        <td className="border border-black px-3 py-2">{index + 1}</td>
+                        <td className="border border-black px-3 py-2">{item.deskripsi || '-'}</td>
+                        <td className="border border-black px-3 py-2 text-center">{item.qty}</td>
+                        <td className="border border-black px-3 py-2 text-center">{item.satuan}</td>
+                        <td className="border border-black px-3 py-2 text-right">{formatRupiah(item.hargaSatuan)}</td>
+                        <td className="border border-black px-3 py-2 text-right">{formatRupiah(calculateSubtotal(item))}</td>
                       </tr>
                     ))}
-                    <tr className="bg-gray-200 font-bold text-base">
-                      <td colSpan="5" className="border border-gray-300 px-3 py-2 text-right">TOTAL:</td>
-                      <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateTotal())}</td>
+                    <tr className="bg-black text-white font-bold text-base">
+                      <td colSpan="5" className="border border-black px-3 py-2 text-right">TOTAL:</td>
+                      <td className="border border-black px-3 py-2 text-right">{formatRupiah(calculateTotal())}</td>
                     </tr>
                     {dpPercentage > 0 && (
                       <>
-                        <tr className="font-semibold">
-                          <td colSpan="5" className="border border-gray-300 px-3 py-2 text-right">DP ({dpPercentage}%):</td>
-                          <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateDpAmount())}</td>
+                        <tr className="bg-white font-semibold">
+                          <td colSpan="5" className="border border-black px-3 py-2 text-right">DP ({dpPercentage}%):</td>
+                          <td className="border border-black px-3 py-2 text-right">{formatRupiah(calculateDpAmount())}</td>
                         </tr>
-                        <tr className="bg-orange-50 font-bold text-base">
-                          <td colSpan="5" className="border border-gray-300 px-3 py-2 text-right">SISA TAGIHAN SETELAH TERPASANG:</td>
-                          <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateGrandTotal())}</td>
+                        <tr className="bg-white font-bold text-base">
+                          <td colSpan="5" className="border border-black px-3 py-2 text-right">SISA TAGIHAN SETELAH TERPASANG:</td>
+                          <td className="border border-black px-3 py-2 text-right">{formatRupiah(calculateGrandTotal())}</td>
                         </tr>
                       </>
                     )}
