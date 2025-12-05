@@ -278,26 +278,28 @@ function App() {
 
             {/* Total */}
             <div className="bg-blue-50 rounded-md p-4 mb-4 space-y-2">
-              <div className="flex justify-between items-center text-sm">
-                <span className="font-medium text-gray-700">Subtotal:</span>
-                <span className="font-semibold text-gray-800">
+              <div className="flex justify-between items-center">
+                <span className="font-bold text-lg text-gray-700">TOTAL:</span>
+                <span className="font-bold text-2xl text-blue-600">
                   {formatRupiah(calculateTotal())}
                 </span>
               </div>
               {dp > 0 && (
-                <div className="flex justify-between items-center text-sm">
-                  <span className="font-medium text-gray-700">DP:</span>
-                  <span className="font-semibold text-red-600">
-                    - {formatRupiah(dp)}
-                  </span>
-                </div>
+                <>
+                  <div className="flex justify-between items-center text-sm border-t pt-2">
+                    <span className="font-medium text-gray-700">DP:</span>
+                    <span className="font-semibold text-gray-800">
+                      {formatRupiah(dp)}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center border-t pt-2">
+                    <span className="font-bold text-lg text-green-700">SISA TAGIHAN SETELAH TERPASANG:</span>
+                    <span className="font-bold text-xl text-green-600">
+                      {formatRupiah(calculateGrandTotal())}
+                    </span>
+                  </div>
+                </>
               )}
-              <div className="flex justify-between items-center border-t pt-2">
-                <span className="font-bold text-lg text-gray-700">Total:</span>
-                <span className="font-bold text-2xl text-blue-600">
-                  {formatRupiah(calculateGrandTotal())}
-                </span>
-              </div>
             </div>
 
             {/* Download Button */}
@@ -367,20 +369,22 @@ function App() {
                         <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(item.harga)}</td>
                       </tr>
                     ))}
-                    <tr className="bg-gray-100 font-bold">
-                      <td colSpan="2" className="border border-gray-300 px-3 py-2 text-right">Subtotal:</td>
+                    <tr className="bg-gray-200 font-bold text-base">
+                      <td colSpan="2" className="border border-gray-300 px-3 py-2 text-right">TOTAL:</td>
                       <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateTotal())}</td>
                     </tr>
                     {dp > 0 && (
-                      <tr className="font-semibold">
-                        <td colSpan="2" className="border border-gray-300 px-3 py-2 text-right">DP:</td>
-                        <td className="border border-gray-300 px-3 py-2 text-right text-red-600">- {formatRupiah(dp)}</td>
-                      </tr>
+                      <>
+                        <tr className="font-semibold">
+                          <td colSpan="2" className="border border-gray-300 px-3 py-2 text-right">DP:</td>
+                          <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(dp)}</td>
+                        </tr>
+                        <tr className="bg-green-50 font-bold text-base">
+                          <td colSpan="2" className="border border-gray-300 px-3 py-2 text-right">SISA TAGIHAN SETELAH TERPASANG:</td>
+                          <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateGrandTotal())}</td>
+                        </tr>
+                      </>
                     )}
-                    <tr className="bg-gray-200 font-bold">
-                      <td colSpan="2" className="border border-gray-300 px-3 py-2 text-right">Total:</td>
-                      <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateGrandTotal())}</td>
-                    </tr>
                   </tbody>
                 </table>
               </div>
