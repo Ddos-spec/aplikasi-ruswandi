@@ -21,7 +21,7 @@ function App() {
   })
 
   const [items, setItems] = useState([
-    { id: 1, deskripsi: '', qty: 1, hargaSatuan: 0 }
+    { id: 1, deskripsi: '', qty: 1, satuan: 'm1', hargaSatuan: 0 }
   ])
 
   const [dpPercentage, setDpPercentage] = useState(0)
@@ -46,6 +46,7 @@ function App() {
       id: Date.now(),
       deskripsi: '',
       qty: 1,
+      satuan: 'm1',
       hargaSatuan: 0
     }])
   }
@@ -255,9 +256,9 @@ function App() {
                         rows="2"
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="grid grid-cols-3 gap-2">
                         <div>
-                          <label className="block text-xs text-gray-600 mb-1">Qty / Jumlah (m/pcs)</label>
+                          <label className="block text-xs text-gray-600 mb-1">Qty / Jumlah</label>
                           <input
                             type="number"
                             placeholder="121"
@@ -267,6 +268,23 @@ function App() {
                             min="0"
                             step="0.01"
                           />
+                        </div>
+                        <div>
+                          <label className="block text-xs text-gray-600 mb-1">Satuan</label>
+                          <select
+                            value={item.satuan}
+                            onChange={(e) => handleItemChange(item.id, 'satuan', e.target.value)}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          >
+                            <option value="m1">m1 (meter)</option>
+                            <option value="m2">m2 (meter²)</option>
+                            <option value="m3">m3 (meter³)</option>
+                            <option value="pcs">pcs (pieces)</option>
+                            <option value="set">set</option>
+                            <option value="batang">batang</option>
+                            <option value="lembar">lembar</option>
+                            <option value="unit">unit</option>
+                          </select>
                         </div>
                         <div>
                           <label className="block text-xs text-gray-600 mb-1">Harga Satuan</label>
@@ -431,6 +449,7 @@ function App() {
                       <th className="border border-gray-300 px-3 py-2 text-left">No</th>
                       <th className="border border-gray-300 px-3 py-2 text-left">Deskripsi</th>
                       <th className="border border-gray-300 px-3 py-2 text-center">Qty</th>
+                      <th className="border border-gray-300 px-3 py-2 text-center">Satuan</th>
                       <th className="border border-gray-300 px-3 py-2 text-right">Harga Satuan</th>
                       <th className="border border-gray-300 px-3 py-2 text-right">Jumlah</th>
                     </tr>
@@ -441,22 +460,23 @@ function App() {
                         <td className="border border-gray-300 px-3 py-2">{index + 1}</td>
                         <td className="border border-gray-300 px-3 py-2">{item.deskripsi || '-'}</td>
                         <td className="border border-gray-300 px-3 py-2 text-center">{item.qty}</td>
+                        <td className="border border-gray-300 px-3 py-2 text-center">{item.satuan}</td>
                         <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(item.hargaSatuan)}</td>
                         <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateSubtotal(item))}</td>
                       </tr>
                     ))}
                     <tr className="bg-gray-200 font-bold text-base">
-                      <td colSpan="4" className="border border-gray-300 px-3 py-2 text-right">TOTAL:</td>
+                      <td colSpan="5" className="border border-gray-300 px-3 py-2 text-right">TOTAL:</td>
                       <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateTotal())}</td>
                     </tr>
                     {dpPercentage > 0 && (
                       <>
                         <tr className="font-semibold">
-                          <td colSpan="4" className="border border-gray-300 px-3 py-2 text-right">DP ({dpPercentage}%):</td>
+                          <td colSpan="5" className="border border-gray-300 px-3 py-2 text-right">DP ({dpPercentage}%):</td>
                           <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateDpAmount())}</td>
                         </tr>
                         <tr className="bg-green-50 font-bold text-base">
-                          <td colSpan="4" className="border border-gray-300 px-3 py-2 text-right">SISA TAGIHAN SETELAH TERPASANG:</td>
+                          <td colSpan="5" className="border border-gray-300 px-3 py-2 text-right">SISA TAGIHAN SETELAH TERPASANG:</td>
                           <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateGrandTotal())}</td>
                         </tr>
                       </>
