@@ -242,11 +242,11 @@ function App() {
                       )}
                     </div>
                     <div className="space-y-2">
-                      <input
-                        type="text"
-                        placeholder="Deskripsi item"
+                      <textarea
+                        placeholder="Deskripsi item (contoh: Pintu Aluminium ukuran 2x3 meter, warna putih, include handle dan kunci)"
                         value={item.deskripsi}
                         onChange={(e) => handleItemChange(item.id, 'deskripsi', e.target.value)}
+                        rows="3"
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                       <input
