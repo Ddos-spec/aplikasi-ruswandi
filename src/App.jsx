@@ -327,8 +327,10 @@ function App() {
               {/* Pembuka */}
               <div className="mb-6 text-sm">
                 <p className="mb-2">Dengan hormat,</p>
-                <p className="text-justify">
-                  Bersama ini kami mengajukan penawaran harga untuk produk/jasa sebagai berikut:
+                <p className="text-justify mb-3">
+                  Terima kasih atas kesempatan yang diberikan kepada kami untuk mengajukan penawaran.
+                  Sehubungan dengan kebutuhan Bapak/Ibu, dengan ini kami sampaikan penawaran harga
+                  untuk produk/jasa yang kami tawarkan dengan rincian sebagai berikut:
                 </p>
               </div>
 
@@ -372,8 +374,15 @@ function App() {
 
               {/* Penutup */}
               <div className="mb-8 text-sm">
-                <p className="mb-2 text-justify">
-                  Demikian penawaran ini kami sampaikan. Atas perhatian dan kerjasamanya, kami ucapkan terima kasih.
+                <p className="mb-3 text-justify">
+                  Demikian penawaran harga ini kami sampaikan dengan sebenar-benarnya.
+                  Apabila ada hal-hal yang perlu didiskusikan lebih lanjut, kami siap untuk
+                  melakukan pertemuan atau komunikasi lebih lanjut.
+                </p>
+                <p className="text-justify">
+                  Besar harapan kami penawaran ini dapat diterima dengan baik dan dapat terjalin
+                  kerja sama yang saling menguntungkan. Atas perhatian dan kepercayaan yang diberikan,
+                  kami ucapkan terima kasih.
                 </p>
               </div>
 
@@ -382,7 +391,7 @@ function App() {
                 <div className="text-center text-sm">
                   <p className="mb-2">Hormat kami,</p>
                   <img
-                    src="/tanda tangan.png"
+                    src="tanda tangan.png"
                     alt="Tanda Tangan"
                     className="w-32 h-auto mx-auto"
                   />
