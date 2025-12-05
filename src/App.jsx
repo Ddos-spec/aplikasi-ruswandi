@@ -1,10 +1,18 @@
-import React, { useState } from 'react'
-import { FileText, Download, Plus, Trash2 } from 'lucide-react'
+import React, { useState, useEffect } from 'react'
+import { FileText, Download, Plus, Trash2, RefreshCw } from 'lucide-react'
 import html2pdf from 'html2pdf.js'
 
 function App() {
+  const generateNoPenawaran = () => {
+    const now = new Date()
+    const month = String(now.getMonth() + 1).padStart(2, '0')
+    const year = now.getFullYear()
+    const random = Math.floor(Math.random() * 9000) + 1000 // 4 digit random
+    return `${random}/PEN/${month}/${year}`
+  }
+
   const [formData, setFormData] = useState({
-    noPenawaran: '',
+    noPenawaran: generateNoPenawaran(),
     tanggal: new Date().toISOString().split('T')[0],
     kepada: '',
     perusahaan: '',
@@ -99,14 +107,23 @@ function App() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     No. Penawaran
                   </label>
-                  <input
-                    type="text"
-                    name="noPenawaran"
-                    value={formData.noPenawaran}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="001/PEN/XII/2024"
-                  />
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      name="noPenawaran"
+                      value={formData.noPenawaran}
+                      onChange={handleInputChange}
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="001/PEN/XII/2024"
+                    />
+                    <button
+                      onClick={() => setFormData(prev => ({ ...prev, noPenawaran: generateNoPenawaran() }))}
+                      className="px-3 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors"
+                      title="Generate nomor baru"
+                    >
+                      <RefreshCw className="w-5 h-5" />
+                    </button>
+                  </div>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -363,8 +380,13 @@ function App() {
               {/* Tanda Tangan */}
               <div className="flex justify-end">
                 <div className="text-center text-sm">
-                  <p className="mb-16">Hormat kami,</p>
-                  <p className="font-bold border-t border-gray-800 pt-1">Ruswandi</p>
+                  <p className="mb-2">Hormat kami,</p>
+                  <img
+                    src="/tanda tangan.png"
+                    alt="Tanda Tangan"
+                    className="w-32 h-auto mx-auto"
+                  />
+                  <p className="font-bold border-t border-gray-800 pt-1 mt-2">Ruswandi</p>
                 </div>
               </div>
             </div>
