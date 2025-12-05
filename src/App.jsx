@@ -227,7 +227,7 @@ function App() {
                 <h3 className="font-semibold text-lg text-gray-700">Item Penawaran</h3>
                 <button
                   onClick={addItem}
-                  className="flex items-center gap-1 px-3 py-1 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors text-sm"
+                  className="flex items-center gap-1 px-3 py-1 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors text-sm"
                 >
                   <Plus className="w-4 h-4" />
                   Tambah Item
@@ -300,7 +300,7 @@ function App() {
                       <div className="bg-gray-50 px-3 py-2 rounded border border-gray-200">
                         <div className="flex justify-between items-center">
                           <span className="text-xs text-gray-600">Subtotal Item:</span>
-                          <span className="font-semibold text-blue-600">{formatRupiah(calculateSubtotal(item))}</span>
+                          <span className="font-semibold text-purple-600">{formatRupiah(calculateSubtotal(item))}</span>
                         </div>
                       </div>
                     </div>
@@ -363,10 +363,10 @@ function App() {
             </div>
 
             {/* Total */}
-            <div className="bg-blue-50 rounded-md p-4 mb-4 space-y-2">
+            <div className="bg-purple-50 rounded-md p-4 mb-4 space-y-2">
               <div className="flex justify-between items-center">
                 <span className="font-bold text-lg text-gray-700">TOTAL:</span>
-                <span className="font-bold text-2xl text-blue-600">
+                <span className="font-bold text-2xl text-purple-600">
                   {formatRupiah(calculateTotal())}
                 </span>
               </div>
@@ -379,8 +379,8 @@ function App() {
                     </span>
                   </div>
                   <div className="flex justify-between items-center border-t pt-2">
-                    <span className="font-bold text-lg text-green-700">SISA TAGIHAN SETELAH TERPASANG:</span>
-                    <span className="font-bold text-xl text-green-600">
+                    <span className="font-bold text-lg text-orange-700">SISA TAGIHAN SETELAH TERPASANG:</span>
+                    <span className="font-bold text-xl text-orange-600">
                       {formatRupiah(calculateGrandTotal())}
                     </span>
                   </div>
@@ -391,7 +391,7 @@ function App() {
             {/* Download Button */}
             <button
               onClick={generatePDF}
-              className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 font-semibold"
+              className="w-full bg-purple-600 text-white py-3 rounded-md hover:bg-purple-700 transition-colors flex items-center justify-center gap-2 font-semibold"
             >
               <Download className="w-5 h-5" />
               Download PDF
@@ -475,7 +475,7 @@ function App() {
                           <td colSpan="5" className="border border-gray-300 px-3 py-2 text-right">DP ({dpPercentage}%):</td>
                           <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateDpAmount())}</td>
                         </tr>
-                        <tr className="bg-green-50 font-bold text-base">
+                        <tr className="bg-orange-50 font-bold text-base">
                           <td colSpan="5" className="border border-gray-300 px-3 py-2 text-right">SISA TAGIHAN SETELAH TERPASANG:</td>
                           <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateGrandTotal())}</td>
                         </tr>
