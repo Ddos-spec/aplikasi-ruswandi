@@ -4,7 +4,8 @@
       "Bash(nul)",
       "Bash(cat:*)",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: Aplikasi Generator Penawaran Ruswandi\n\n- Setup React + Vite + Tailwind CSS\n- Implementasi form input penawaran lengkap\n- Fitur preview real-time\n- Export ke PDF dengan html2pdf.js\n- GitHub Actions untuk auto-deploy ke GitHub Pages\n- Responsive design\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []
