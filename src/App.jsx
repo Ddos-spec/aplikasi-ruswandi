@@ -25,6 +25,7 @@ function App() {
   ])
 
   const [dpPercentage, setDpPercentage] = useState(0)
+  const [termasukPemasangan, setTermasukPemasangan] = useState(false)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -266,6 +267,35 @@ function App() {
               </div>
             </div>
 
+            {/* Status Pemasangan */}
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Status Pemasangan
+              </label>
+              <div className="space-y-2">
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="pemasangan"
+                    checked={!termasukPemasangan}
+                    onChange={() => setTermasukPemasangan(false)}
+                    className="mr-2"
+                  />
+                  <span className="text-sm text-gray-700">Harga belum termasuk pemasangan</span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="pemasangan"
+                    checked={termasukPemasangan}
+                    onChange={() => setTermasukPemasangan(true)}
+                    className="mr-2"
+                  />
+                  <span className="text-sm text-gray-700">Harga sudah termasuk pemasangan</span>
+                </label>
+              </div>
+            </div>
+
             {/* DP */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -411,7 +441,9 @@ function App() {
               <div className="mb-6 text-sm border border-gray-300 bg-yellow-50 p-4 rounded">
                 <p className="font-bold mb-2">NOTE:</p>
                 <p className="mb-2">PEMBAYARAN MOHON DI TRANSFER KE REK. BCA NO. REK. 7550033997 A/N RUSWANDI</p>
-                <p className="italic">"Harga tersebut belum termasuk pemasangan"</p>
+                <p className="italic">
+                  "{termasukPemasangan ? 'Harga tersebut sudah termasuk pemasangan' : 'Harga tersebut belum termasuk pemasangan'}"
+                </p>
               </div>
 
               {/* Penutup */}
