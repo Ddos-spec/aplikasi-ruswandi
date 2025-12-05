@@ -332,13 +332,17 @@ function App() {
 
             <div id="preview-content" className="border border-gray-300 rounded-md p-8 bg-white">
               {/* Header */}
-              <div className="text-center mb-8">
-                <h1 className="text-3xl font-bold text-gray-800 mb-2">SURAT PENAWARAN</h1>
-                <p className="text-sm text-gray-600">No: {formData.noPenawaran || '___________'}</p>
+              <div className="mb-8">
+                <img
+                  src="headerpenawaran.jpeg"
+                  alt="Header Serasi Parquet"
+                  className="w-full h-auto"
+                />
               </div>
 
               {/* Info Surat */}
               <div className="mb-6 text-sm">
+                <p className="mb-1">No: {formData.noPenawaran || '___________'}</p>
                 <p className="mb-1">Tanggal: {new Date(formData.tanggal).toLocaleDateString('id-ID', {
                   day: 'numeric',
                   month: 'long',
