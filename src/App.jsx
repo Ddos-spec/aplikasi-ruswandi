@@ -21,7 +21,7 @@ function App() {
   })
 
   const [items, setItems] = useState([
-    { id: 1, deskripsi: '', harga: 0 }
+    { id: 1, deskripsi: '', qty: 1, hargaSatuan: 0 }
   ])
 
   const [dpPercentage, setDpPercentage] = useState(0)
@@ -45,7 +45,8 @@ function App() {
     setItems(prev => [...prev, {
       id: Date.now(),
       deskripsi: '',
-      harga: 0
+      qty: 1,
+      hargaSatuan: 0
     }])
   }
 
@@ -68,7 +69,7 @@ function App() {
   }
 
   const calculateSubtotal = (item) => {
-    return item.harga
+    return item.qty * item.hargaSatuan
   }
 
   const calculateTotal = () => {
@@ -248,19 +249,42 @@ function App() {
                     </div>
                     <div className="space-y-2">
                       <textarea
-                        placeholder="Deskripsi item (contoh: Pintu Aluminium ukuran 2x3 meter, warna putih, include handle dan kunci)"
+                        placeholder="Deskripsi item (contoh: Jati ukuran 1,5cm x 9cm x 200cm)"
                         value={item.deskripsi}
                         onChange={(e) => handleItemChange(item.id, 'deskripsi', e.target.value)}
-                        rows="3"
+                        rows="2"
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
-                      <input
-                        type="text"
-                        placeholder="Harga (contoh: 1.000.000)"
-                        value={item.harga === 0 ? '' : formatRupiahInput(item.harga.toString())}
-                        onChange={(e) => handleItemChange(item.id, 'harga', parseRupiahInput(e.target.value))}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
+                      <div className="grid grid-cols-2 gap-2">
+                        <div>
+                          <label className="block text-xs text-gray-600 mb-1">Qty / Jumlah (m/pcs)</label>
+                          <input
+                            type="number"
+                            placeholder="121"
+                            value={item.qty === 0 ? '' : item.qty}
+                            onChange={(e) => handleItemChange(item.id, 'qty', Number(e.target.value))}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            min="0"
+                            step="0.01"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs text-gray-600 mb-1">Harga Satuan</label>
+                          <input
+                            type="text"
+                            placeholder="220.000"
+                            value={item.hargaSatuan === 0 ? '' : formatRupiahInput(item.hargaSatuan.toString())}
+                            onChange={(e) => handleItemChange(item.id, 'hargaSatuan', parseRupiahInput(e.target.value))}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+                      </div>
+                      <div className="bg-gray-50 px-3 py-2 rounded border border-gray-200">
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-gray-600">Subtotal Item:</span>
+                          <span className="font-semibold text-blue-600">{formatRupiah(calculateSubtotal(item))}</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -406,7 +430,9 @@ function App() {
                     <tr className="bg-gray-100">
                       <th className="border border-gray-300 px-3 py-2 text-left">No</th>
                       <th className="border border-gray-300 px-3 py-2 text-left">Deskripsi</th>
-                      <th className="border border-gray-300 px-3 py-2 text-right">Harga</th>
+                      <th className="border border-gray-300 px-3 py-2 text-center">Qty</th>
+                      <th className="border border-gray-300 px-3 py-2 text-right">Harga Satuan</th>
+                      <th className="border border-gray-300 px-3 py-2 text-right">Jumlah</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -414,21 +440,23 @@ function App() {
                       <tr key={item.id}>
                         <td className="border border-gray-300 px-3 py-2">{index + 1}</td>
                         <td className="border border-gray-300 px-3 py-2">{item.deskripsi || '-'}</td>
-                        <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(item.harga)}</td>
+                        <td className="border border-gray-300 px-3 py-2 text-center">{item.qty}</td>
+                        <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(item.hargaSatuan)}</td>
+                        <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateSubtotal(item))}</td>
                       </tr>
                     ))}
                     <tr className="bg-gray-200 font-bold text-base">
-                      <td colSpan="2" className="border border-gray-300 px-3 py-2 text-right">TOTAL:</td>
+                      <td colSpan="4" className="border border-gray-300 px-3 py-2 text-right">TOTAL:</td>
                       <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateTotal())}</td>
                     </tr>
                     {dpPercentage > 0 && (
                       <>
                         <tr className="font-semibold">
-                          <td colSpan="2" className="border border-gray-300 px-3 py-2 text-right">DP ({dpPercentage}%):</td>
+                          <td colSpan="4" className="border border-gray-300 px-3 py-2 text-right">DP ({dpPercentage}%):</td>
                           <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateDpAmount())}</td>
                         </tr>
                         <tr className="bg-green-50 font-bold text-base">
-                          <td colSpan="2" className="border border-gray-300 px-3 py-2 text-right">SISA TAGIHAN SETELAH TERPASANG:</td>
+                          <td colSpan="4" className="border border-gray-300 px-3 py-2 text-right">SISA TAGIHAN SETELAH TERPASANG:</td>
                           <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateGrandTotal())}</td>
                         </tr>
                       </>
