@@ -24,7 +24,7 @@ function App() {
     { id: 1, deskripsi: '', harga: 0 }
   ])
 
-  const [dp, setDp] = useState(0)
+  const [dpPercentage, setDpPercentage] = useState(0)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -74,8 +74,12 @@ function App() {
     return items.reduce((total, item) => total + calculateSubtotal(item), 0)
   }
 
+  const calculateDpAmount = () => {
+    return (calculateTotal() * dpPercentage) / 100
+  }
+
   const calculateGrandTotal = () => {
-    return calculateTotal() - dp
+    return calculateTotal() - calculateDpAmount()
   }
 
   const formatRupiah = (angka) => {
@@ -265,15 +269,25 @@ function App() {
             {/* DP */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                DP / Uang Muka (Opsional)
+                DP / Uang Muka dalam Persen (Opsional)
               </label>
-              <input
-                type="text"
-                placeholder="Masukkan DP (contoh: 500.000)"
-                value={dp === 0 ? '' : formatRupiahInput(dp.toString())}
-                onChange={(e) => setDp(parseRupiahInput(e.target.value))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
+              <div className="flex gap-2 items-center">
+                <input
+                  type="number"
+                  placeholder="Contoh: 50"
+                  value={dpPercentage === 0 ? '' : dpPercentage}
+                  onChange={(e) => setDpPercentage(Number(e.target.value))}
+                  className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  min="0"
+                  max="100"
+                />
+                <span className="text-gray-700 font-medium">%</span>
+              </div>
+              {dpPercentage > 0 && (
+                <p className="text-sm text-gray-600 mt-2">
+                  DP {dpPercentage}% = {formatRupiah(calculateDpAmount())}
+                </p>
+              )}
             </div>
 
             {/* Total */}
@@ -284,12 +298,12 @@ function App() {
                   {formatRupiah(calculateTotal())}
                 </span>
               </div>
-              {dp > 0 && (
+              {dpPercentage > 0 && (
                 <>
                   <div className="flex justify-between items-center text-sm border-t pt-2">
-                    <span className="font-medium text-gray-700">DP:</span>
+                    <span className="font-medium text-gray-700">DP ({dpPercentage}%):</span>
                     <span className="font-semibold text-gray-800">
-                      {formatRupiah(dp)}
+                      {formatRupiah(calculateDpAmount())}
                     </span>
                   </div>
                   <div className="flex justify-between items-center border-t pt-2">
@@ -373,11 +387,11 @@ function App() {
                       <td colSpan="2" className="border border-gray-300 px-3 py-2 text-right">TOTAL:</td>
                       <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateTotal())}</td>
                     </tr>
-                    {dp > 0 && (
+                    {dpPercentage > 0 && (
                       <>
                         <tr className="font-semibold">
-                          <td colSpan="2" className="border border-gray-300 px-3 py-2 text-right">DP:</td>
-                          <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(dp)}</td>
+                          <td colSpan="2" className="border border-gray-300 px-3 py-2 text-right">DP ({dpPercentage}%):</td>
+                          <td className="border border-gray-300 px-3 py-2 text-right">{formatRupiah(calculateDpAmount())}</td>
                         </tr>
                         <tr className="bg-green-50 font-bold text-base">
                           <td colSpan="2" className="border border-gray-300 px-3 py-2 text-right">SISA TAGIHAN SETELAH TERPASANG:</td>
